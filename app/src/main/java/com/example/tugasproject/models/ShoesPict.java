@@ -4,7 +4,7 @@ public class ShoesPict {
     String pict;
     String name;
 
-    public ShoesPict(String logo, String name) {
+    public ShoesPict(String pict, String name) {
         this.pict = pict;
         this.name = name;
     }
@@ -13,8 +13,8 @@ public class ShoesPict {
         return pict;
     }
 
-    public void setLogo(String logo) {
-        this.pict = logo;
+    public void setLogo(String pict) {
+        this.pict = pict;
     }
 
     public String getName() {

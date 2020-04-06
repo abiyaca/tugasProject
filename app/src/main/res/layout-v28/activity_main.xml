@@ -11,6 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="#FFE100"
+        android:fontFamily="sans-serif"
         android:text=" local pride shoes "
         android:textAllCaps="true"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
@@ -25,12 +26,13 @@
 
     <Button
         android:id="@+id/btnExit"
+        style="@android:style/Widget.DeviceDefault.Button.Colored"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#DF0404"
+        android:background="#AE2929"
+        android:fontFamily="sans-serif-smallcaps"
         android:text="exit"
         android:textAllCaps="false"
-        android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
