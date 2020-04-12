@@ -1,58 +1,108 @@
 package com.example.tugasproject.adapters;
 
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.example.tugasproject.DetailActivity;
 import com.example.tugasproject.R;
-import com.example.tugasproject.models.ShoesPict;
-import com.squareup.picasso.Picasso;
 
-import java.util.List;
+import java.util.ArrayList;
+
+import de.hdodenhof.circleimageview.CircleImageView;
+
+/**
+ * Created by User on 1/1/2018.
+ */
 
 public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder>{
-    private Context context;
-    private List<ShoesPict> items;
 
-    public MainAdapter(Context context, List<ShoesPict> items) {
-        this.context = context;
-        this.items = items;
-    }
+    private static final String TAG = "RecyclerViewAdapter";
 
-    @NonNull
-    @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context)
-                .inflate(R.layout.item_main, parent, false);
-        return new ViewHolder(view);
+    private ArrayList<String> mImageNames = new ArrayList<>();
+    private ArrayList<String> mImages = new ArrayList<>();
+    private Context mContext;
+
+    public MainAdapter(Context context, ArrayList<String> imageNames, ArrayList<String> images ) {
+        mImageNames = imageNames;
+        mImages = images;
+        mContext = context;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        ShoesPict item = items.get(position);
-        holder.nameText.setText(item.getName());
-        Picasso.get().load(item.getLogo()).into(holder.shoesImage);
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_main, parent, false);
+        ViewHolder holder = new ViewHolder(view);
+        return holder;
+    }
+
+    @Override
+    public void onBindViewHolder(ViewHolder holder, final int position) {
+        Log.d(TAG, "onBindViewHolder: called.");
+
+        Glide.with(mContext)
+                .asBitmap()
+                .load(mImages.get(position))
+                .into(holder.image);
+
+        holder.imageName.setText(mImageNames.get(position));
+
+        holder.parentLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d(TAG, "onClick: clicked on: " + mImageNames.get(position));
+
+                Toast.makeText(mContext, mImageNames.get(position), Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(mContext, DetailActivity.class);
+                intent.putExtra("image_url", mImages.get(position));
+                intent.putExtra("image_name", mImageNames.get(position));
+                mContext.startActivity(intent);
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
-        return (items != null) ? items.size() : 0;
+        return mImageNames.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView shoesImage;
-        TextView nameText;
 
-        public ViewHolder(@NonNull View itemView) {
+    public class ViewHolder extends RecyclerView.ViewHolder{
+
+        CircleImageView image;
+        TextView imageName;
+        RelativeLayout parentLayout;
+
+        public ViewHolder(View itemView) {
             super(itemView);
-            shoesImage = itemView.findViewById(R.id.image_pict);
-            nameText = itemView.findViewById(R.id.text_name);
+            image = itemView.findViewById(R.id.image);
+            imageName = itemView.findViewById(R.id.image_name);
+            parentLayout = itemView.findViewById(R.id.parent_layout);
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
