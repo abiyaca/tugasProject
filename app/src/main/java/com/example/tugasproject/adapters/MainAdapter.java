@@ -6,7 +6,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,8 +19,6 @@ import com.example.tugasproject.R;
 
 import java.util.ArrayList;
 
-import de.hdodenhof.circleimageview.CircleImageView;
-
 /**
  * Created by User on 1/1/2018.
  */
@@ -30,11 +29,13 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder>{
 
     private ArrayList<String> mImageNames = new ArrayList<>();
     private ArrayList<String> mImages = new ArrayList<>();
+    private ArrayList<String> mDetails = new ArrayList<>();
     private Context mContext;
 
-    public MainAdapter(Context context, ArrayList<String> imageNames, ArrayList<String> images ) {
+    public MainAdapter(Context context, ArrayList<String> imageNames, ArrayList<String> images, ArrayList<String> details ) {
         mImageNames = imageNames;
         mImages = images;
+        mDetails = details;
         mContext = context;
     }
 
@@ -66,6 +67,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder>{
                 Intent intent = new Intent(mContext, DetailActivity.class);
                 intent.putExtra("image_url", mImages.get(position));
                 intent.putExtra("image_name", mImageNames.get(position));
+                intent.putExtra("image_detail", mDetails.get(position));
                 mContext.startActivity(intent);
             }
         });
@@ -79,9 +81,9 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder>{
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
-        CircleImageView image;
+        ImageView image;
         TextView imageName;
-        RelativeLayout parentLayout;
+        LinearLayout parentLayout;
 
         public ViewHolder(View itemView) {
             super(itemView);

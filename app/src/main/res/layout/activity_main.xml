@@ -5,7 +5,7 @@
     android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#343337"
+    android:background="@drawable/bacckk"
     tools:context="com.example.tugasproject.MainActivity">
 
     <androidx.recyclerview.widget.RecyclerView
@@ -24,7 +24,7 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="28dp"
         android:background="#DADFDFDF"
         android:text=" LOCALPRIDE SHOES "
         android:textAllCaps="false"
@@ -32,7 +32,6 @@
         android:textSize="30sp"
         android:textStyle="bold|italic"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.447"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -42,8 +41,8 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:background="#AE2929"
-        android:text="EXIT"
         android:onClick="btnExit"
+        android:text="EXIT"
         android:textColor="#FFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
